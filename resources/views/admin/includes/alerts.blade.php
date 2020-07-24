@@ -22,3 +22,10 @@
         {{ session('error') }}
     </div>
 @endif
+
+<!--Vincular Permissões ao Perfil-->
+@if (session('info'))
+    <div class="alert alert-warning">
+        {{ session('info') }}
+    </div>
+@endif

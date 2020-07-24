@@ -1,8 +1,8 @@
-<!--Listar os Perfils-->
+<!--Listar os Permissões de um Perfil-->
 
 @extends('adminlte::page')
 
-@section('title', 'Perfil')
+@section('title', 'Permissões do Perfil {$profile->name}')
 
 @section('content_header')
     <!--Breadcrumb - aquele negócio em cima-->
@@ -11,18 +11,19 @@
             <a href="{{ route('admin.index') }}">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">
-            <a href="{{ route('profiles.index') }}">Perfil</a>
+            <a href="{{ route('profiles.index') }}">Permissões do Perfil</a>
         </li>
     </ol>
-    <!--Melhorias no módulo de Planos-->
     <!-- https://fontawesome.com/icons?d=gallery&q=add -->
-    <h1>Perfil <a href="{{ route('profiles.create') }}" class="btn btn-dark">ADD <i class="fas fa-plus-square"></i></a></h1>
+    <h1>Permissões do Perfil <strong>{{ $profile->name }}</strong></h1>
+    {{-- Vincular Permissões ao Perfil --}}
+    <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark">ADD NOVA PERMISSÃO<i class="fas fa-plus-square"></i></a>
+    
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <!--FILTRO - Pesquisar um plano-->
             <form action="{{ route('profiles.search') }}" method="POST" class="form form-inline">
                 @csrf <!--sempre que for post utiliza o @ csrf-->
                 <input type="text" name="filter" placeholder="Filtro" class="form-control" value="{{ $filters['filter'] ?? ''}}"> <!--esse value deixa o campo preenchido com último valor digitado-->
@@ -34,35 +35,19 @@
                 <thead>
                     <tr>
                         <th>Nome: </th>
-                        <th>CNPJ: </th>
-                        <th>Telefone: </th>
-                        <th>E-mail: </th>
                         <th width="260px">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($profiles as $profile)
+                    @foreach ($permissions as $permission)
                         <tr>
                             <td>
-                                {{ $profile->name }}
-                            </td>
-                            <td>
-                                {{ $profile->cnpj }}
-                            </td>
-                            <td>
-                                {{ $profile->fone }}
-                            </td>
-                            <td>
-                                {{ $profile->email }}
+                                {{ $permission->name }}
                             </td>
                             <td style="width=10px">
-                                <!--Listar os Detalhes do Plano-->
-                                <!--<a href="{ { route('details.profile.index', $profile->url)}}" class="btn btn-primary">DETALHES</a>-->
+                                <!--<a href="{ { route('details.permission.index', $permission->url)}}" class="btn btn-primary">DETALHES</a>-->
                                 <!---->
                                 <a href="{{ route('profiles.edit', $profile->id)}}" class="btn btn-info">EDITAR</a>
-                                <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-warning">VER</a>
-                                {{-- Listar as Permissões de um Perfil --}}
-                                <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-warning"><i class="fas fa-lock"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -72,9 +57,9 @@
         <!--criar paginação com links()-->
         <div class="card-footer">
             @if (isset($filters))
-                {!! $profiles->appends($filters)->links() !!}
+                {!! $permissions->appends($filters)->links() !!}
             @else
-                {!! $profiles->links() !!}
+                {!! $permissions->links() !!}
             @endif
         </div>
     </div>
