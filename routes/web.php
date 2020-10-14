@@ -12,13 +12,19 @@ Route::prefix('admin')
     /**
      * Permission x Profile
      */
+    //Desvincular Permissão do Perfil
+    Route::get('profiles/{id}/permission/{idPermission}/detach', 'ACL\PermissionProfileController@detachPermissionProfile')->name('profiles.permission.detach');
     //Vincular Permissões ao Perfil
     //Vai vincular os permissions que receber daquele formulário ao perfil
     Route::post('profiles/{id}/permissions', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
-    Route::get('profiles/{id}/permissions/create', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
+    //Filtrar Permissões disponíveis
+    Route::any('profiles/{id}/permissions/create', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
+    //Route::get('profiles/{id}/permissions/create', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
     //Listar as Permissões de um Perfil
     Route::get('profiles/{id}/permissions', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
     //dps vai no terminal e digita php artisan make:controller Admin\ACL\PermissionProfileController
+    //Listar Perfis da Permissão
+    Route::get('permissions/{id}/profile', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
 
     /**
      * Routes Permissions

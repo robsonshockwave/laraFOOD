@@ -2,7 +2,7 @@
 
 @extends('adminlte::page')
 
-@section('title', 'Permissões disponíveis no Perfil {$profile->name}')
+@section('title', "Permissões disponíveis no Perfil {$profile->name}")
 
 @section('content_header')
     <!--Breadcrumb - aquele negócio em cima-->
@@ -23,7 +23,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('profiles.search') }}" method="POST" class="form form-inline">
+            <form action="{{ route('profiles.permissions.available', $profile->id) }}" method="POST" class="form form-inline">
                 @csrf <!--sempre que for post utiliza o @ csrf-->
                 <input type="text" name="filter" placeholder="Filtro" class="form-control" value="{{ $filters['filter'] ?? ''}}"> <!--esse value deixa o campo preenchido com último valor digitado-->
                 <button type="submit" class="btn btn-dark">PESQUISAR</button>
