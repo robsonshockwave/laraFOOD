@@ -15,7 +15,7 @@ Necessita de ter o Docker (https://www.docker.com/) instalado. Pode baixá-lo no
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/robsonshockwave/salao-anonymous
+git clone https://github.com/robsonshockwave/larafood
 # Entrar no diretório
 cd salao-anonymous
 
