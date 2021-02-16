@@ -1,4 +1,4 @@
-# (sob construção)
+# (sob construção...)
 <h2 align="center">laraFOOD</h2>
 
 ## 🛠 Tecnologias utilizadas além do Laravel:
